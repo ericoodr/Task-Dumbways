@@ -1,0 +1,14 @@
+body{
+    font-family: Arial,Arial, Helvetica, sans-serif;
+    background: #ffffff;
+}
+h1{
+    color: navy;
+}
+p{
+    line-height: 1.6;
+}
+button{
+    background: green;
+    color: rgb(0, 0, 0);
+}
