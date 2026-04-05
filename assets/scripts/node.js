@@ -1,7 +1,5 @@
-// TIPE DATA & VARIABEL
 let daftarPesan = [];
 
-// AMBIL DATA DARI LOCAL STORAGE
 function ambilDariStorage() {
     let tersimpan = localStorage.getItem("pesanKu");
     if (tersimpan) {
@@ -9,12 +7,10 @@ function ambilDariStorage() {
     }
 }
 
-// SIMPAN KE LOCAL STORAGE
 function simpanKeStorage() {
     localStorage.setItem("pesanKu", JSON.stringify(daftarPesan));
 }
 
-// TAMBAH PESAN
 function tambahPesan(nama, email, pesan) {
     let pesanBaru = {
         id: Date.now(),
@@ -31,7 +27,6 @@ function tambahPesan(nama, email, pesan) {
     }
 }
 
-// TAMPILKAN SEMUA PESAN + TOMBOL HAPUS
 function tampilkanSemuaPesan() {
     let container = document.getElementById("daftarPesan");
     
@@ -40,10 +35,10 @@ function tampilkanSemuaPesan() {
     if (daftarPesan.length === 0) {
         container.innerHTML = "<p>Belum ada pesan</p>";
         return;
-    }  
+    }
+    
     let hasil = "";
-    for (let i = 0; i < daftarPesan.length; i++) {
-        let p = daftarPesan[i];
+    daftarPesan.forEach(p => {
         hasil += `
             <div class="pesan-item" data-id="${p.id}">
                 <strong>${p.nama}</strong> 
@@ -52,33 +47,58 @@ function tampilkanSemuaPesan() {
                 <button class="btn-hapus" data-id="${p.id}">Hapus</button>
             </div>
         `;
-    }
+    });
     container.innerHTML = hasil;
     
-    let tombolHapus = document.querySelectorAll(".btn-hapus");
-    for (let i = 0; i < tombolHapus.length; i++) {
-        tombolHapus[i].addEventListener("click", function() {
+    document.querySelectorAll(".btn-hapus").forEach(btn => {
+        btn.addEventListener("click", function() {
             let idPesan = Number(this.getAttribute("data-id"));
             hapusPesanById(idPesan);
         });
-    }
+    });
 }
 
-// HAPUS PESAN BERDASARKAN ID
 function hapusPesanById(id) {
-    let pesanBaru = [];
-    for (let i = 0; i < daftarPesan.length; i++) {
-        if (daftarPesan[i].id !== id) {
-            pesanBaru.push(daftarPesan[i]);
-        }
-    }
-    daftarPesan = pesanBaru;
+    daftarPesan = daftarPesan.filter(p => p.id !== id);
     simpanKeStorage();
     tampilkanSemuaPesan();
     alert("Pesan dihapus!");
 }
 
-// HANDLE FORM DI CONTACT.HTML
+function cariPesan(nama) {
+    let container = document.getElementById("daftarPesan");
+    if (!container) return;
+    
+    let hasilCari = daftarPesan.filter(p => {
+        return p.nama.toLowerCase().includes(nama.toLowerCase());
+    });
+    
+    if (hasilCari.length === 0) {
+        container.innerHTML = "<p>Tidak ada pesan dari nama tersebut</p>";
+        return;
+    }
+    
+    let hasil = "";
+    hasilCari.forEach(p => {
+        hasil += `
+            <div class="pesan-item" data-id="${p.id}">
+                <strong>${p.nama}</strong> 
+                <small>${p.waktu}</small>
+                <p>${p.pesan}</p>
+                <button class="btn-hapus" data-id="${p.id}">Hapus</button>
+            </div>
+        `;
+    });
+    container.innerHTML = hasil;
+    
+    document.querySelectorAll(".btn-hapus").forEach(btn => {
+        btn.addEventListener("click", function() {
+            let idPesan = Number(this.getAttribute("data-id"));
+            hapusPesanById(idPesan);
+        });
+    });
+}
+
 document.addEventListener("DOMContentLoaded", function() {
     ambilDariStorage();
     
@@ -114,5 +134,26 @@ document.addEventListener("DOMContentLoaded", function() {
     
     if (document.getElementById("daftarPesan")) {
         tampilkanSemuaPesan();
+    }
+    
+    let btnCari = document.getElementById("btnCari");
+    let btnTampilSemua = document.getElementById("btnTampilSemua");
+    let inputCari = document.getElementById("cariNama");
+    
+    if (btnCari) {
+        btnCari.onclick = function() {
+            if (inputCari.value === "") {
+                alert("Masukkan nama");
+                return;
+            }
+            cariPesan(inputCari.value);
+        };
+    }
+    
+    if (btnTampilSemua) {
+        btnTampilSemua.onclick = function() {
+            tampilkanSemuaPesan();
+            inputCari.value = "";
+        };
     }
 });
