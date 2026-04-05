@@ -6,7 +6,6 @@ body {
     line-height: 1.6;
 }
 
-/* NAVIGASI */
 nav {
     text-align: center;
     padding: 20px;
@@ -42,7 +41,6 @@ nav a:hover {
     transform: translateY(-2px);
 }
 
-/* MAIN CONTENT */
 #content {
     min-height: 400px;
     padding: 20px;
@@ -50,7 +48,6 @@ nav a:hover {
     margin: 0 auto;
 }
 
-/* CARD */
 .card {
     background: #111;
     border: 1px solid #333;
@@ -74,7 +71,6 @@ nav a:hover {
     line-height: 1.6;
 }
 
-/* BADGE */
 .badge {
     display: inline-block;
     background: #222;
@@ -92,7 +88,6 @@ nav a:hover {
     transform: scale(1.05);
 }
 
-/* FORM */
 form {
     display: flex;
     flex-direction: column;
@@ -130,7 +125,6 @@ button[type="submit"]:hover {
     transform: translateY(-2px);
 }
 
-/* TOMBOL HAPUS */
 .btn-hapus {
     background: #dc3545;
     color: white;
@@ -147,7 +141,6 @@ button[type="submit"]:hover {
     transform: scale(1.02);
 }
 
-/* PESAN SECTION */
 .pesan-section {
     margin-top: 40px;
     padding: 20px;
@@ -181,7 +174,6 @@ button[type="submit"]:hover {
     color: #ddd;
 }
 
-/* FOOTER */
 footer {
     text-align: center;
     padding: 20px;
@@ -194,7 +186,6 @@ footer i {
     color: orange;
 }
 
-/* LAYOUT */
 .about-title {
     margin-top: 80px;
     padding-top: 70px;
@@ -208,7 +199,6 @@ footer i {
     gap: 20px;
 }
 
-/* TYPOGRAPHY */
 h1 {
     color: orange;
 }
@@ -219,7 +209,6 @@ h3 {
     color: orange;
 }
 
-/* ANIMASI */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -234,7 +223,6 @@ h3 {
     animation: fadeIn 0.5s ease;
 }
 
-/* RESPONSIVE */
 @media (max-width: 768px) {
     nav {
         padding: 10px;
@@ -271,4 +259,60 @@ h3 {
         font-size: 12px;
         padding: 4px 10px;
     }
+}
+
+.cari-container {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.cari-input {
+    padding: 8px 12px;
+    width: 200px;
+    background: #222;
+    border: 1px solid #444;
+    color: white;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.cari-input:focus {
+    outline: none;
+    border-color: orange;
+    box-shadow: 0 0 5px rgba(255, 165, 0, 0.3);
+}
+
+.cari-btn {
+    padding: 8px 16px;
+    background: #444;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.cari-btn:hover {
+    background: rgb(1, 169, 247);
+    transform: translateY(-2px);
+}
+
+.semua-btn {
+    padding: 8px 16px;
+    background: #444;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.semua-btn:hover {
+    background: rgb(1, 169, 247);
+    color: black;
+    transform: translateY(-2px);
 }
